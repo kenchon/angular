@@ -260,3 +260,40 @@ Angular標準パイプ：
 - 構造ディレクティブ：要素を追加・削除することで，文書ツリーを変更
 - 属性ディレクティブ：属性の形式で，要素・コンポーネントの見た目や動作を変更
 
+### スタイルの変更
+ボタンを押すと，コンポーネントの背景色と文字色が変更される：
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  template: `
+    <input type="button" (click)="back=!back;fore=!fore" value="Background"/>
+    <div [ngStyle]="styles">
+    {{msg}}
+    </div>`
+})
+
+export class AppComponent {
+  msg: string = `Hello World!`;
+  back = false;
+  fore = false;
+  get styles(){
+    return {
+      'background-color': this.back ? '#12346b': '',
+      'color': this.fore ? '#fff': '',
+      fontWeight: 'bold',
+      margin: '15px',
+      padding: '15px'
+    };
+  };
+}
+```
+ボタン押す前：
+# TODO: add pictures
+
+# 5. フォーム開発
+> フロントエンド開発において，フォームはエンドユーザからの入力を受け取る代表的な手段です。Angularはユーザからの入力を受けて，処理を開始し，その結果をテンプレートに反映する。
+
+## 5.1 フォーム開発の基本
+- Angularでは，`<form>/<input>`要素が拡張されており，リッチなフォームを簡単なコードで実装できる。
