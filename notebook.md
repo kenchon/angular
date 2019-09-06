@@ -297,3 +297,45 @@ export class AppComponent {
 
 ## 5.1 フォーム開発の基本
 - Angularでは，`<form>/<input>`要素が拡張されており，リッチなフォームを簡単なコードで実装できる。
+- 入力内容の検証などもできる
+- 
+
+# 6. コンポーネント開発
+Angularは，コンポーネント指向のフレームワークである。コンポーネントは以下の役割を受け持つ：
+- ビューを整形する
+- バックエンドにビューの情報を引き渡す
+- バックエンドの情報をビューに引き渡す
+- 本章では，複数のコンポーネントを連携させる方法を学ぶ
+
+[参考：BFF（Backends For Frontends）超入門](https://www.atmarkit.co.jp/ait/articles/1803/12/news012.html)
+>マイクロサービス/API時代のフロントエンド開発に求められる技術の1つBackends For Frontends（BFF）について解説する連載。初回は「超入門」としてBFFの概要や事例を中心に紹介する。
+
+## 階層的なコンポーネント
+- 基盤となる`AppComponent`の中で，子`ChildComponent`を呼び出すような入れ子構造を作れる。
+- 複数コンポーネントが相互にコミュニケーションする場合がある。そうしたとき，子コンポーネントは，親コンポーネントへの入出力時に，`@Input`，`@Output`アノテーションを用いることができる。
+- **テンプレート参照変数**を用いる方法でも子コンポーネントを参照できる。
+
+## コンポーネントのライフサイクル
+大まかな流れ：
+>コンポーネントは，まず最初に生成された後，プロパティ・子コンポーネントの経k名を受けて状態（表示）を変化させていき，非表示になるタイミングで破棄される。
+
+- Angularには，ライフサイクルの変化を受けて呼び出される様々なメソッドがあり，**ライフサイクルメソッド**と呼ばれる。
+- `ngOnInit()`，`ngOnDestroyed()` －ページの初期化，終了処理－などが内部的に行われて，画面の生成などが管理される。でも，これらを明示的に呼び出すこともできる。
+- 明示的に呼び出すことのメリットは，ライフサイクルの切り替わり時に，特定の処理を呼び出せるようになること。
+
+### `ngOnChanges()`
+プロパティが変化したときに呼び出される。
+
+```typescript:明示的に実装した例
+ngOnChanges(changes: SimpleChanges) {
+  console.log('［child］ngOnChanges');
+  for (let prop in changes) {
+    let change = changes[prop];
+    console.log(`${prop}：${change.previousValue} => ${change.currentValue}`);   
+  }
+}
+```
+- `SimpleChanges`
+	- 「`プロパティ名：変更情報`」のハッシュ。
+	- `.previousValue`, `.currentValue`などのメンバーを持っている。
+
