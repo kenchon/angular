@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
   template: `
+    <h1>Welcome to this page</h1>
     <input type="button" (click)="back=!back;fore=!fore" value="Background"/>
     <div [ngStyle]="styles">
     {{msg}}
