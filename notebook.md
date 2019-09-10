@@ -331,7 +331,7 @@ ngOnChanges(changes: SimpleChanges) {
   console.log('［child］ngOnChanges');
   for (let prop in changes) {
     let change = changes[prop];
-    console.log(`${prop}：${change.previousValue} => ${change.currentValue}`);   
+    sconsole.log(`${prop}：${change.previousValue} => ${change.currentValue}`);   
   }
 }
 ```
@@ -339,3 +339,26 @@ ngOnChanges(changes: SimpleChanges) {
 	- 「`プロパティ名：変更情報`」のハッシュ。
 	- `.previousValue`, `.currentValue`などのメンバーを持っている。
 
+---
+
+# Snipets
+
+## Modal表示に関する諸々
+
+```html
+<div class="modal-header">
+	<h4 class="modal-title">{{'E.APIKEY.WORK.CONFIRM_MODAL.TITLE' | translate}}</h4>
+</div>
+<div class="modal-body">
+	<p>{{'E.APIKEY.WORK.CONFIRM_MODAL.MODAL_MSG' | translate}}</p>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-outline-secondary" (click)="activeModal.close(false)">
+	{{'E.APIKEY.WORK.CONFIRM_MODAL.MODAL_NG_BTN' | translate}}</button>
+	<button type="button" class="btn btn-danger" (click)="activeModal.close(true)">
+	{{'E.APIKEY.WORK.CONFIRM_MODAL.MODAL_OK_BTN' | translate}}</button>
+</div>
+```
+- `<p>`：１つの段落であることを示すタグ，いい感じの改行がなされる。
+- `<div>`：<DIV>タグはそれ自身は特に意味を持っていないが、<DIV>～</DIV>で囲んだ範囲をひとかたまりとして、 align属性で位置を指定したり、スタイルシートを適用するのに用いる。
+- `<span>`：単体では特に意味を持たないタグだが、<span>～</span>で囲った部分をインライン要素としてグループ化することができる。
