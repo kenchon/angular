@@ -331,7 +331,7 @@ ngOnChanges(changes: SimpleChanges) {
   console.log('［child］ngOnChanges');
   for (let prop in changes) {
     let change = changes[prop];
-    sconsole.log(`${prop}：${change.previousValue} => ${change.currentValue}`);   
+    console.log(`${prop}：${change.previousValue} => ${change.currentValue}`);   
   }
 }
 ```
@@ -339,7 +339,18 @@ ngOnChanges(changes: SimpleChanges) {
 	- 「`プロパティ名：変更情報`」のハッシュ。
 	- `.previousValue`, `.currentValue`などのメンバーを持っている。
 
----
+### `ngAfterViewInit(), ngAfterViewChecked()`
+ビューの初期化・変更時の処理を実装する。
+- `ngAfterViewInit()`：ビューが初期化されるときにのみ呼び出される
+- `ngAfterViewChecked()`：ビューが変更されるときに呼び出される
+- `<ng-content></ng-content>`：呼び出し元のコンポーネントから，子コンポーネントへの埋め込みを行うときに使う。細かい使い方は`p.200`参照。
+- `@ViewChild()`：現在のビューに配置された子コンポーネントを参照するためのデコレータ。子コンポーネントが複数ある場合は`@ViewChildren()`を使う。
+
+### `ngAfterContentInit(), ngAfterContentChecked()`
+外部コンテンツの初期化・変更時の処理を実装する。
+- `ngAfterContentInit()`：ビューが初期化されるときにのみ呼び出される
+- `ngAfterContentChecked()`：ビューが変更されるときに呼び出される
+- `@ViewContent()`：外部コンテンツで定義された子コンポーネントを参照するためのデコレータ。
 
 # Snipets
 
