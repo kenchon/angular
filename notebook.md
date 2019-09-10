@@ -352,6 +352,21 @@ ngOnChanges(changes: SimpleChanges) {
 - `ngAfterContentChecked()`：ビューが変更されるときに呼び出される
 - `@ViewContent()`：外部コンテンツで定義された子コンポーネントを参照するためのデコレータ。
 
+## 6.3 コンポーネントのスタイル定義
+- `@Component`デコレータのstyle・styleUrlsパラメータを指定することで，コンポーネントのスタイルを変えられる。
+- コンポーネントの中で定義されたスタイルは，閉じており，他のところで定義されたものと衝突しない。
+- つまり，`app.component.ts`のテンプレート内で定義された`<p>`には反映されても，`index.html`で定義された`<p>`にはスタイルは反映されない。
+- スタイル定義は`app.component.css`として外部化することができ，`styleUrls`パラメータで指定することもできる。
+
+**スタイル指定のベストプラクティス**:
+望ましい順に，
+- `template`の`style`・`styleUrls`パラメータで指定する
+- `@import`ディレクティブを用いる。
+```javascript
+@import 'app.component.ext.css';
+```
+
+
 # Snipets
 
 ## Modal表示に関する諸々
